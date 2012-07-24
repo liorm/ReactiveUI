@@ -42,7 +42,8 @@ namespace ReactiveUI
         {
             // Default name for the field backing the "Foo" property => "_Foo"
             // This is used for ReactiveObject's RaiseAndSetIfChanged mixin
-            GetFieldNameForPropertyNameFunc = new Func<string,string>(x => "_" + x);
+            //GetFieldNameForPropertyNameFunc = new Func<string,string>(x => "_" + x);
+            GetFieldNameForPropertyNameFunc = new Func<string, string>(x => Char.ToLowerInvariant(x[0]) + x.Substring(1));
 
             if (InUnitTestRunner()) {
                 Console.Error.WriteLine("*** Detected Unit Test Runner, setting Scheduler to Immediate ***");
@@ -404,7 +405,7 @@ namespace ReactiveUI
             }, 50/*items*/);
 #endif
 
-        internal static FieldInfo getFieldInfoForProperty<TObj>(string prop_name, bool dontThrow = false)
+        internal static FieldInfo getFieldInfoForProperty<TObj>(string prop_name, bool dontThrow = false) 
             where TObj : IReactiveNotifyPropertyChanged
         {
             Contract.Requires(prop_name != null);
