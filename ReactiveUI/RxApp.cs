@@ -559,7 +559,7 @@ namespace ReactiveUI
     public sealed class RefcountDisposeWrapper
     {
         IDisposable _inner;
-        long refCount = 1;
+        int refCount = 1;
 
         public RefcountDisposeWrapper(IDisposable inner) { _inner = inner; }
 
